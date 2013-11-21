@@ -1,0 +1,10 @@
+{
+  "name": "webbr-codelab-polymer",
+  "version": "0.0.1",
+  "description": "Codelab about polymer.",
+  "author": "Joao Paulo Dubas <joao.dubas@gmail.com>",
+  "dependencies": {
+    "polymer": "latest",
+    "polymer-ui-elements": "~0.0.20131108"
+  }
+}
