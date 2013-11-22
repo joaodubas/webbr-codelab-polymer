@@ -1,15 +1,52 @@
+<link
+    rel="import"
+    href="/bower_components/polymer-ui-elements/polymer-ui-icon/polymer-ui-icon.html">
 <polymer-element
     name="quotation-element"
     constructor="QuotationElement"
-    attributes="">
+    attributes="addedBy author">
   <template>
     <style>
       @host {
-        :scope { display: block; }
+        :scope {
+          background: #fcfcfc;
+          border: 1px solid #dedede;
+          margin-top: 20px;
+          display: block;
+        }
+      }
+      .header {
+        background: #4d88d4;
+        color: #fcfcfc;
+        line-height: 24px;
+        padding: 0 10px;
+      }
+      .quote {
+        font-size: 1.7;
+        line-height: 60px;
+        padding: 0 10px 10px 10px;
+      }
+      .author {
+        color: #737373;
+        font-size: 0.8em;
+        line-height: 0.8;
+        text-align: right;
+      }
+      polymer-ui-icon {
+        float: right;
       }
     </style>
 
-    <span>Eu sou <b>quotation-element</b>. Este &eacute; meu Shadow DOM.</span>
+    <div class="header">
+      <span>Adicionado por <b>{{ addedBy }}</b></span>
+      <polymer-ui-icon
+          icon="close"
+          on-click="{{ destroyAction }}"></polymer-ui-icon>
+    </div>
+    <div class="quote">
+      <content select="span"></content>
+      <div class="author">{{ author }}</div>
+    </div>
   </template>
   <script>
     Polymer('quotation-element', {
@@ -18,7 +55,10 @@
       created: function () {},
       enteredView: function () {},
       leftView: function () {},
-      attributeChanged: function (attrName, oldVal, newVal) {}
+      attributeChanged: function (attrName, oldVal, newVal) {},
+      destroyAction: function () {
+        this.parentNode.removeChild(this);
+      }
     });
   </script>
 </polymer-element>
