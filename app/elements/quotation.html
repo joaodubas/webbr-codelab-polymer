@@ -1,0 +1,24 @@
+<polymer-element
+    name="quotation-element"
+    constructor="QuotationElement"
+    attributes="">
+  <template>
+    <style>
+      @host {
+        :scope { display: block; }
+      }
+    </style>
+
+    <span>Eu sou <b>quotation-element</b>. Este &eacute; meu Shadow DOM.</span>
+  </template>
+  <script>
+    Polymer('quotation-element', {
+      applyAuthorStyles: true,
+      resetStyleInheritance: true,
+      created: function () {},
+      enteredView: function () {},
+      leftView: function () {},
+      attributeChanged: function (attrName, oldVal, newVal) {}
+    });
+  </script>
+</polymer-element>
