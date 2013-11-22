@@ -11,10 +11,16 @@
 
   <!-- import all components -->
   <link rel="import" href="/elements/quotation.html">
+  <link rel="import" href="/elements/quote-adder.html">
 </head>
 <body>
-  <quotation-element addedBy="Dubas" author="Laurence J. Petter">
-    <span>Against logic there is no armor like ignorance.</span>
-  </quotation-element>
+  <div class="container" id="adder-container">
+    <quote-adder></quote-adder>
+  </div>
+  <div class="container" id="quotes-container">
+    <quotation-element addedBy="Dubas" author="Laurence J. Petter">
+      <span>Against logic there is no armor like ignorance.</span>
+    </quotation-element>
+  </div>
 </body>
 </html>
