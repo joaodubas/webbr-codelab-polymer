@@ -1,0 +1,79 @@
+<polymer-element
+    name="quote-adder"
+    constructor="QuoteAdder"
+    attributes="">
+  <template>
+    <style>
+      @host {
+        :scope {
+          display: block;
+        }
+      }
+      #quote-text {
+        display: block;
+        width: 500px;
+      }
+      .quote-input {
+        font-size: 1.6em;
+        line-height: 1.2;
+        width: 246px;
+      }
+    </style>
+
+    <form id="quote-form">
+      <input
+          id="quote-publisher"
+          class="quote-input"
+          placeholder="Nome"
+          autofocus
+          on-keypress="{{ nextFieldAction }}">
+      <input
+          id="quote-author"
+          class="quote-input"
+          placeholder="Autor"
+          on-keypress="{{ nextFieldAction }}">
+      <input
+          id="quote-text"
+          class="quote-input"
+          placeholder="Cita&ccedil;&atilde;o"
+          on-keypress="{{ quoteCommitAction }}">
+    </form>
+  </template>
+  <script>
+    var ENTERKEY = 13;
+    Polymer('quote-adder', {
+      applyAuthorStyles: true,
+      resetStyleInheritance: true,
+      created: function () {},
+      enteredView: function () {},
+      leftView: function () {},
+      attributeChanged: function (attrName, oldVal, newVal) {},
+      nextFieldAction: function (e, detail, sender) {
+        if (e.keyCode !== ENTERKEY) return;
+        sender.nextElementSibling.focus();
+      },
+      quoteCommitAction: function (e, detail, sender) {
+        if (e.keyCode !== ENTERKEY) return;
+
+        function getFieldValue(id_) {
+          return document.getElementById(id_).value.trim();
+        }
+
+        var publisher = getFieldValue('quote-publisher');
+        var author = getFieldValue('quote-author');
+        var quote = getFieldValue('quote-text');
+
+        var quotationElement = '<quotation-element addedBy="' + publisher + '"';
+        quotationElement += ' author="' + author + '">';
+        quotationElement += '<span>' + quote + '</span>';
+        quotationElement += '</quotation-element>';
+
+        var container = document.getElementById('quotes-container');
+        container.innerHTML = quotationElement + container.innerHTML;
+
+        document.getElementById('quote-form').reset();
+        document.getElementById('quote-publisher').focus();
+      }
+    });
+  </script>
+</polymer-element>
