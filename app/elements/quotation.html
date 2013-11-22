@@ -1,6 +1,9 @@
 <link
     rel="import"
     href="/bower_components/polymer-ui-elements/polymer-ui-icon/polymer-ui-icon.html">
+<link
+    rel="import"
+    href="/bower_components/polymer-elements/polymer-animation/polymer-animation.html">
 <polymer-element
     name="quotation-element"
     constructor="QuotationElement"
@@ -47,17 +50,45 @@
       <content select="span"></content>
       <div class="author">{{ author }}</div>
     </div>
+
+    <polymer-animation id="fade-in" duration="1">
+      <polymer-animation-keyframe>
+        <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
+      </polymer-animation-keyframe>
+      <polymer-animation-keyframe>
+        <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
+      </polymer-animation-keyframe>
+    </polymer-animation>
+    <polymer-animation id="fade-out" duration="1">
+      <polymer-animation-keyframe>
+        <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
+      </polymer-animation-keyframe>
+      <polymer-animation-keyframe>
+        <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
+      </polymer-animation-keyframe>
+    </polymer-animation>
   </template>
   <script>
     Polymer('quotation-element', {
       applyAuthorStyles: true,
       resetStyleInheritance: true,
       created: function () {},
-      enteredView: function () {},
+      enteredView: function () {
+        this.$['fade-in'].target = this;
+        this.$['fade-in'].play();
+      },
       leftView: function () {},
       attributeChanged: function (attrName, oldVal, newVal) {},
       destroyAction: function () {
-        this.parentNode.removeChild(this);
+        var self = this;
+
+        function removeNode(e) {
+          self.parentNode.removeChild(self);
+        }
+
+        this.$['fade-out'].target = this;
+        this.$['fade-out'].addEventListener('complete', removeNode);
+        this.$['fade-out'].play();
       }
     });
   </script>
