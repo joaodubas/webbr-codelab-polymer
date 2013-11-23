@@ -51,7 +51,7 @@
       <div class="author">{{ author }}</div>
     </div>
 
-    <polymer-animation id="fade-in" duration="1">
+    <polymer-animation id="fade-in" duration="1" fillMode="both">
       <polymer-animation-keyframe>
         <polymer-animation-prop name="opacity" value="0"></polymer-animation-prop>
       </polymer-animation-keyframe>
@@ -59,7 +59,7 @@
         <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
       </polymer-animation-keyframe>
     </polymer-animation>
-    <polymer-animation id="fade-out" duration="1">
+    <polymer-animation id="fade-out" duration="1" fillMode="both">
       <polymer-animation-keyframe>
         <polymer-animation-prop name="opacity" value="1"></polymer-animation-prop>
       </polymer-animation-keyframe>
