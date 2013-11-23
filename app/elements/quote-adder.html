@@ -41,6 +41,22 @@
   </template>
   <script>
     var ENTERKEY = 13;
+
+    function createQuoteNode(publisher, author, quote) {
+      var fragment = document.createDocumentFragment();
+      var node = document.createElement('quotation-element');
+      var content = document.createElement('span');
+
+      node.addedby = publisher;
+      node.author = author;
+      content.textContent = quote;
+
+      node.appendChild(content);
+      fragment.appendChild(node);
+
+      return fragment;
+    }
+
     Polymer('quote-adder', {
       applyAuthorStyles: true,
       resetStyleInheritance: true,
@@ -64,13 +80,11 @@
         var author = getFieldValue('quote-author');
         var quote = getFieldValue('quote-text');
 
-        var quotationElement = '<quotation-element addedBy="' + publisher + '"';
-        quotationElement += ' author="' + author + '">';
-        quotationElement += '<span>' + quote + '</span>';
-        quotationElement += '</quotation-element>';
-
         var container = document.querySelector('#quotes-container');
-        container.innerHTML = quotationElement + container.innerHTML;
+        container.insertBefore(
+          createQuoteNode(publisher, author, quote),
+          container.firstElementChild
+        );
 
         this.$['quote-form'].reset();
         this.$['quote-publisher'].focus();
