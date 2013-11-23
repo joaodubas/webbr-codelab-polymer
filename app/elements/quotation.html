@@ -87,7 +87,7 @@
         }
 
         this.$['fade-out'].target = this;
-        this.$['fade-out'].addEventListener('complete', removeNode);
+        this.$['fade-out'].addEventListener('polymer-animation-end', removeNode);
         this.$['fade-out'].play();
       }
     });
